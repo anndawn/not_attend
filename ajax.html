@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  body {
+  font-family:"avenir next", Arial, sans-serif;
+  font-size: 12px;
+  color: #696969;
+}
+
+#play-button {
+  position: absolute;
+  top: 60px;
+  left: 30px;
+  background: #f08080;
+  padding-right: 26px;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  margin: 0;
+  padding: 0 12px;
+  width: 60px;
+  cursor: pointer;
+  height: 30px;
+}
+
+#play-button:hover {
+  background-color: #696969;
+}    
+
+#search{
+  position: absolute;
+  top: 60px;
+  left: 120px;
+}
+#searchbox{
+  width:200px;
+  height:25px
+}
+
+.ticks {
+  font-size: 10px;
+}
+
+.track,
+.track-inset,
+.track-overlay {
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: #000;
+  stroke-opacity: 0.3;
+  stroke-width: 10px;
+}
+
+.track-inset {
+  stroke: #dcdcdc;
+  stroke-width: 8px;
+}
+
+.track-overlay {
+  pointer-events: stroke;
+  stroke-width: 50px;
+  stroke: transparent;
+  cursor: crosshair;
+}
+
+.handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1.25px;
+}
+
+  
+div.tooltip {
+    position: absolute;
+    background-color: white;
+    max-width: 250px;
+    height: auto;
+    padding: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, .5);
+    pointer-events: none;
+  }
+</style>
+
+<body>
+  <button id="play-button">Play</button>
+  <div id="search">
+    <input type="text" id='searchbox' placeholder="type an ISO code, like 'CHN'">
+    <button id='searchbtn'>Search</button>
+  </div>
+  <div id="content">
+    <svg >
+      <!-- <g transform="translate(50, 200)"></g> -->
+    </svg>
+  </div>
+<div id="chart"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="moment.js"></script>
+
+<!-- <script src='https://d3js.org/d3.v5.min.js'></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+<script src='main2.js'></script>
+<!-- <script>
+  d3.json('https://coronavirus-tracker-api.herokuapp.com/all',
+        function (data) {
+        packdata=data['confirmed']['locations'].filter(d=>d.province!="")
+        packcountry=packdata.map(d=>d.country_code)
+        packcountry2=Array.from(new Set(packcountry));
+        packcountry=[]
+        singledata=data['confirmed']['locations'].filter(d=>d.province=="")
+        singlecountry=singledata.map(d=>d.country_code)
+        singlecountry2=Array.from(new Set(singlecountry));
+        for (const i of packcountry2) {
+          if (!singlecountry2.includes(i)) {
+            packcountry.push(i)
+          }
+        }
+        console.log(packcountry);
+        packdata=packdata.filter(d=>packcountry.includes(d.country_code))
+
+        var nest = d3.nest()
+                    .key(function(d) { return d.country_code; })
+                    // .rollup(function(v) { return d3.sum(v, function(d) { return d.history; }); })
+                    .entries(packdata)
+        var packcountry=[]
+        for (const i in nest) {
+          var coun0={'country_code':0,"history":{}}
+          let valuecou=nest[i]['values'].map(d=>d.history)
+          coun0['country_code']=nest[i]['key']
+          function sumObjectsByKey(...objs) {
+              return objs.reduce((a, b) => {
+                for (let k in b) {
+                  if (b.hasOwnProperty(k))
+                    a[k] = (a[k] || 0) + b[k];
+                }
+                return a;
+              }, {});
+            }
+          // console.log(valuecou);
+          coun0['history']=sumObjectsByKey(...valuecou)
+         packcountry.push(coun0)
+        }
+        console.log(packcountry);
+        
+        })
+</script> -->
+</html>
