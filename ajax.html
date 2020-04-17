@@ -38,7 +38,7 @@
   left: 120px;
 }
 #searchbox{
-  width:200px;
+  width:250px;
   height:25px
 }
 
@@ -90,17 +90,29 @@ div.tooltip {
     box-shadow: 3px 3px 10px rgba(0, 0, 0, .5);
     pointer-events: none;
   }
+
+.selected{
+  fill:red !important;
+  stroke:#000;
+  stroke-width:2px;
+}
+
+.legendSize circle{
+  fill:#ccc
+}
+text.legendTitle{
+  transform:translate(0,20) !important
+}
 </style>
 
 <body>
   <button id="play-button">Play</button>
   <div id="search">
-    <input type="text" id='searchbox' placeholder="type an ISO code, like 'CHN'">
+    <input type="text" id='searchbox' placeholder="type country, like 'CHN', CN or China">
     <button id='searchbtn'>Search</button>
   </div>
   <div id="content">
     <svg >
-      <!-- <g transform="translate(50, 200)"></g> -->
     </svg>
   </div>
 <div id="chart"></div>
@@ -111,49 +123,7 @@ div.tooltip {
 <!-- <script src='https://d3js.org/d3.v5.min.js'></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+<script src='countrylist.js'></script>
 <script src='main2.js'></script>
-<!-- <script>
-  d3.json('https://coronavirus-tracker-api.herokuapp.com/all',
-        function (data) {
-        packdata=data['confirmed']['locations'].filter(d=>d.province!="")
-        packcountry=packdata.map(d=>d.country_code)
-        packcountry2=Array.from(new Set(packcountry));
-        packcountry=[]
-        singledata=data['confirmed']['locations'].filter(d=>d.province=="")
-        singlecountry=singledata.map(d=>d.country_code)
-        singlecountry2=Array.from(new Set(singlecountry));
-        for (const i of packcountry2) {
-          if (!singlecountry2.includes(i)) {
-            packcountry.push(i)
-          }
-        }
-        console.log(packcountry);
-        packdata=packdata.filter(d=>packcountry.includes(d.country_code))
 
-        var nest = d3.nest()
-                    .key(function(d) { return d.country_code; })
-                    // .rollup(function(v) { return d3.sum(v, function(d) { return d.history; }); })
-                    .entries(packdata)
-        var packcountry=[]
-        for (const i in nest) {
-          var coun0={'country_code':0,"history":{}}
-          let valuecou=nest[i]['values'].map(d=>d.history)
-          coun0['country_code']=nest[i]['key']
-          function sumObjectsByKey(...objs) {
-              return objs.reduce((a, b) => {
-                for (let k in b) {
-                  if (b.hasOwnProperty(k))
-                    a[k] = (a[k] || 0) + b[k];
-                }
-                return a;
-              }, {});
-            }
-          // console.log(valuecou);
-          coun0['history']=sumObjectsByKey(...valuecou)
-         packcountry.push(coun0)
-        }
-        console.log(packcountry);
-        
-        })
-</script> -->
 </html>
