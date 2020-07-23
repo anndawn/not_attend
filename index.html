@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ 
+    #observablehq-63a4dbfa .observablehq-work{
+        display:none
+    }
+
+</style>
+<body>
+    <div id="observablehq-63a4dbfa">
+        <div class="container">
+            <div class="observablehq-viewof-date"></div>
+            <div class="observablehq-viewof-selected_country"></div>
+        </div>
+        <div class="observablehq-chart"></div>
+        <div class="observablehq-work"></div>
+      </div>
+      <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+        import define from "https://api.observablehq.com/@anndawn/school-closure-and-covid19-cases-trend.js?v=3";
+        (new Runtime).module(define, name => {
+          if (name === "viewof date") return Inspector.into("#observablehq-63a4dbfa .observablehq-viewof-date")();
+          if (name === "viewof selected_country") return Inspector.into("#observablehq-63a4dbfa .observablehq-viewof-selected_country")();
+          if (name === "chart") return Inspector.into("#observablehq-63a4dbfa .observablehq-chart")();
+          if (name === "work") return Inspector.into("#observablehq-63a4dbfa .observablehq-work")();
+        });
+      </script>
+</body>
+</html>
